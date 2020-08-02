@@ -1,57 +1,30 @@
-import React, { useState } from 'react';
+import React, { Component } from 'react';
 import './App.css';
-import Person from './Person/Person'
+import UserInput from './UserInput/UserInput'
+import UserOutput from './UserOutput/UserOutput'
 
-const app = props => {
+class App extends Component {
 
-  const [currentPersonsState, setPersonsState] = useState({
-    persons : [
-      {name:"Maryam", age:22},
-      {name:"Fati", age:30},
-      {name:"Narges", age:33}
-      ]
-  })
-
-  const switchNameHandler = (newName) => {
-    setPersonsState({
-      persons :[
-        {name:"Maryam", age:22},
-        {name:newName, age:30},
-        {name:"Narges", age:33}
-      ]
-    })
+  state = {
+    username:["Mari","Meh"]
   }
 
-  const changeNameHandler = (event) => {
-    setPersonsState({
-      persons :[
-        {name:"Maryam", age:22},
-        {name:event.target.value, age:30},
-        {name:"Narges", age:33}
-      ]
-    })
+  changeUsernameHandler = (event) => {
+    this.setState({
+        username:[event.target.value,"Meh"]
+      })
   }
 
-  
-  return (
-    <div className="App">
-      <h1>Hi! I'm a react app!</h1> 
-      <button onClick={() => switchNameHandler("Fatemeh")}>Switch Name</button>
-      <Person 
-        name={currentPersonsState.persons[0].name} 
-        age={currentPersonsState.persons[0].age}/>
-      <Person 
-        name={currentPersonsState.persons[1].name} 
-        age={currentPersonsState.persons[1].age}
-        click={() => switchNameHandler("Fatiiiiii")}
-        change={changeNameHandler}>My Hobbies: playing violin</Person>
-      <Person 
-        name={currentPersonsState.persons[2].name} 
-        age={currentPersonsState.persons[2].age}/>
-    </div>
-    // React.createElement('div', {className:'App'}, React.createElement('h1',null, "Hi! I'm a react app!"))
-  );
+  render() {
+    return (
+      <div>
+        <UserInput  userName={this.state.username[0]} onchange={this.changeUsernameHandler}/>
+        <UserOutput userName={this.state.username[0]}/>
+        <UserOutput userName={this.state.username[1]}/>
+      </div>
+    );
+  }
   
 }
 
-export default app;
+export default App;
