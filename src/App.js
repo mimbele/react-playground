@@ -36,7 +36,8 @@ class App extends Component {
 
   render () {
     const buttonStyle = {
-      backgroundColor: 'white',
+      backgroundColor: 'green', //green means clicking button will show persons
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -60,6 +61,7 @@ class App extends Component {
           }
         </div>
       );
+      buttonStyle.backgroundColor = 'red'; //red means clicking button will hide persons
     }
 
     return (
