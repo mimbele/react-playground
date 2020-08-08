@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
-import Radium, { StyleRoot } from 'radium'
-import './App.css';
+import Styles from './App.module.css';
 import Person from './Person/Person';
 
 class App extends Component {
@@ -42,11 +41,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
 
     let persons = null;
@@ -67,35 +62,29 @@ class App extends Component {
         </div>
       );
       buttonStyle.backgroundColor = 'red'; //red means clicking button will hide persons
-      buttonStyle[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      };
     }
 
     //change 'This is really working!' paragraph's css class dynamically
     let pStyle = []
     if (this.state.persons.length <=2) {
-      pStyle.push('red'); //pStyle = ['red']
+      pStyle.push(Styles.red); //pStyle = ['red']
     }
     if (this.state.persons.length <=1) {
-      pStyle.push('bold'); //pStyle = ['red', 'bold']
+      pStyle.push(Styles.bold); //pStyle = ['red', 'bold']
     }
     pStyle = pStyle.join(' ');
 
     return (
-      <StyleRoot>
-        <div className="App">
-          <h1>Hi, I'm a React App</h1>
-          <p className={pStyle}>This is really working!</p>
-          <button
-            style={buttonStyle}
-            onClick={this.togglePersonsVisibility}>Show/Hide Persons</button>
-          {persons}
-        </div>
-      </StyleRoot> 
+      <div className={Styles.App}>
+        <h1>Hi, I'm a React App</h1>
+        <p className={pStyle}>This is really working!</p>
+        <button
+          style={buttonStyle}
+          onClick={this.togglePersonsVisibility}>Show/Hide Persons</button>
+        {persons}
+      </div>
     );
   }
 }
 
-export default Radium(App);
+export default App;
