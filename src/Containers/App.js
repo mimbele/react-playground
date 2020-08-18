@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Styles from './App.module.css';
-import Person from '../Components/Persons/Person/Person';
+import Persons from '../Components/Persons/Persons';
 
 class App extends Component {
   state = {
@@ -47,20 +47,11 @@ class App extends Component {
     let persons = null;
 
     if ( this.state.showPersons ) {
-      persons = (
-        <div>
-          {
-            this.state.persons.map( (person, index) => {
-            return <Person
-              click={() => this.deletePerson(index)}
-              name={person.name} 
-              age={person.age}
-              key={person.id}
-              inputChanged={(event) => this.updatePersonName(event, person.id)}/>
-            })
-          }
-        </div>
-      );
+      persons = <Persons
+            persons={this.state.persons}
+            clicked={this.deletePerson}
+            inputChanged={this.updatePersonName} />
+
       buttonStyle.backgroundColor = 'red'; //red means clicking button will hide persons
     }
 
