@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+
 import Styles from './App.module.css';
 import Persons from '../Components/Persons/Persons';
+import Cockpit from '../Components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -35,15 +37,6 @@ class App extends Component {
   }
 
   render () {
-    const buttonStyle = {
-      backgroundColor: 'green', //green means clicking button will show persons
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
 
     if ( this.state.showPersons ) {
@@ -51,27 +44,15 @@ class App extends Component {
             persons={this.state.persons}
             clicked={this.deletePerson}
             inputChanged={this.updatePersonName} />
-
-      buttonStyle.backgroundColor = 'red'; //red means clicking button will hide persons
     }
 
-    //change 'This is really working!' paragraph's css class dynamically
-    let pStyle = []
-    if (this.state.persons.length <=2) {
-      pStyle.push(Styles.red); //pStyle = ['red']
-    }
-    if (this.state.persons.length <=1) {
-      pStyle.push(Styles.bold); //pStyle = ['red', 'bold']
-    }
-    pStyle = pStyle.join(' ');
 
     return (
       <div className={Styles.App}>
-        <h1>Hi, I'm a React App</h1>
-        <p className={pStyle}>This is really working!</p>
-        <button
-          style={buttonStyle}
-          onClick={this.togglePersonsVisibility}>Show/Hide Persons</button>
+        <Cockpit 
+          buttonClicked={this.togglePersonsVisibility}
+          persons={this.state.persons}
+          showPersons={this.state.showPersons}/>
         {persons}
       </div>
     );
